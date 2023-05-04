@@ -7,9 +7,13 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@onready var torso = get_node("Torso")
 
 func _physics_process(delta):
 	# Add the gravity.
+
+	torso.look_at(screen_point_to_ray())
+
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
@@ -29,3 +33,15 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+func screen_point_to_ray():
+	var spaceState = get_world_3d().direct_space_state
+	var mousePos = get_viewport().get_mouse_position()
+	var camera = get_tree().root.get_camera_3d()
+	var rayOrigin = camera.project_ray_origin(mousePos)
+	var rayEnd = rayOrigin + camera.project_ray_normal(mousePos) * 2000
+	var rayProperties = PhysicsRayQueryParameters3D.create(rayOrigin, rayEnd)
+	var rayArray = spaceState.intersect_ray(rayProperties)
+	if rayArray.has("position"):
+		return rayArray["position"]
+	return Vector3()
