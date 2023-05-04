@@ -10,6 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Mech-farmer"
+config/name="Mech-Farmer"
+run/main_scene="res://levels/debug.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
