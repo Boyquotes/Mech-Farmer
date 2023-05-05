@@ -1,6 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://0tjw4dcs7uqb"]
+[gd_scene load_steps=12 format=3 uid="uid://0tjw4dcs7uqb"]
 
+[ext_resource type="Script" path="res://scripts/ui/HealthBar.gd" id="1_8p34s"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_ata1u"]
+[ext_resource type="Script" path="res://scripts/ui/GameOver.gd" id="2_ns16v"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4yuv3"]
 size = Vector3(60, 2, 60)
@@ -15,7 +17,7 @@ size = Vector3(60, 2, 60)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uowiw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gtv21"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.25, 0.25, 1.593)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2rab0"]
 
@@ -24,6 +26,70 @@ size = Vector3(0.5, 0.5, 0.5)
 [sub_resource type="BoxMesh" id="BoxMesh_wgnmo"]
 
 [node name="Main" type="Node"]
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = 36.0
+offset_top = 32.0
+offset_right = 490.0
+offset_bottom = 59.0
+max_value = 20.0
+step = 1.0
+script = ExtResource("1_8p34s")
+
+[node name="GameOver" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.305882, 0, 0.0196078, 0.45098)
+script = ExtResource("2_ns16v")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.5
+offset_top = -11.5
+offset_right = 46.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "GAME OVER"
+fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -328.0
+offset_bottom = 293.0
+grow_horizontal = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+text = "DEBUG MENU"
+fit_content = true
+
+[node name="GameOverButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Will set player health to 0"
+text = "Force Game Over"
+
+[node name="InvincibleButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Invincibility"
+
+[node name="RefillHealthButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Refill Health
+"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -34,17 +100,33 @@ shape = SubResource("BoxShape3D_4yuv3")
 mesh = SubResource("BoxMesh_cjdg6")
 
 [node name="Player" type="CharacterBody3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07451, 0)
 script = ExtResource("1_ata1u")
 
 [node name="Torso" type="Node3D" parent="Player"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Torso"]
+[node name="TorsoMesh" type="MeshInstance3D" parent="Player/Torso"]
 mesh = SubResource("CapsuleMesh_uowiw")
 skeleton = NodePath("../..")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/Torso"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.274196, -0.569321)
+[node name="DirectionMesh" type="MeshInstance3D" parent="Player/Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.643273, 0.166174, -0.304177)
+mesh = SubResource("BoxMesh_gtv21")
+skeleton = NodePath("../..")
+
+[node name="DirectionMesh2" type="MeshInstance3D" parent="Player/Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.643273, 0.6649, -0.304177)
+mesh = SubResource("BoxMesh_gtv21")
+skeleton = NodePath("../..")
+
+[node name="DirectionMesh3" type="MeshInstance3D" parent="Player/Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.594656, 0.6649, -0.304177)
+mesh = SubResource("BoxMesh_gtv21")
+skeleton = NodePath("../..")
+
+[node name="DirectionMesh4" type="MeshInstance3D" parent="Player/Torso"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.594656, 0.161992, -0.304177)
 mesh = SubResource("BoxMesh_gtv21")
 skeleton = NodePath("../..")
 
@@ -61,7 +143,13 @@ transform = Transform3D(0.999976, 0.00698126, 0, -0.0049365, 0.70709, 0.707107, 
 current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.02755, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6363, 2.01678, 0)
 mesh = SubResource("BoxMesh_wgnmo")
+
+[connection signal="button_down" from="VBoxContainer/GameOverButton" to="HealthBar" method="_on_game_over_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/InvincibleButton" to="HealthBar" method="_on_invincible_button_button_down"]
+[connection signal="button_up" from="VBoxContainer/InvincibleButton" to="HealthBar" method="_on_invincible_button_button_up"]
+[connection signal="pressed" from="VBoxContainer/RefillHealthButton" to="HealthBar" method="_on_refill_health_button_pressed"]
