@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://0tjw4dcs7uqb"]
+[gd_scene load_steps=13 format=3 uid="uid://0tjw4dcs7uqb"]
 
 [ext_resource type="Script" path="res://scripts/ui/HealthBar.gd" id="1_8p34s"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_ata1u"]
 [ext_resource type="Script" path="res://scripts/ui/GameOver.gd" id="2_ns16v"]
+[ext_resource type="Script" path="res://scripts/ui/debug/DebugContainer.gd" id="3_u1uvk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4yuv3"]
 size = Vector3(60, 2, 60)
@@ -63,30 +64,32 @@ grow_vertical = 2
 text = "GAME OVER"
 fit_content = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="DebugContainer" type="VBoxContainer" parent="."]
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -328.0
 offset_bottom = 293.0
 grow_horizontal = 0
+script = ExtResource("3_u1uvk")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="DebugContainer"]
 layout_mode = 2
 text = "DEBUG MENU"
 fit_content = true
 
-[node name="GameOverButton" type="Button" parent="VBoxContainer"]
+[node name="GameOverButton" type="Button" parent="DebugContainer"]
 layout_mode = 2
 tooltip_text = "Will set player health to 0"
 text = "Force Game Over"
 
-[node name="InvincibleButton" type="Button" parent="VBoxContainer"]
+[node name="InvincibleButton" type="Button" parent="DebugContainer"]
 layout_mode = 2
 toggle_mode = true
 text = "Invincibility"
 
-[node name="RefillHealthButton" type="Button" parent="VBoxContainer"]
+[node name="RefillHealthButton" type="Button" parent="DebugContainer"]
 layout_mode = 2
 text = "Refill Health
 "
@@ -149,7 +152,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.02755, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6363, 2.01678, 0)
 mesh = SubResource("BoxMesh_wgnmo")
 
-[connection signal="button_down" from="VBoxContainer/GameOverButton" to="HealthBar" method="_on_game_over_button_button_down"]
-[connection signal="button_down" from="VBoxContainer/InvincibleButton" to="HealthBar" method="_on_invincible_button_button_down"]
-[connection signal="button_up" from="VBoxContainer/InvincibleButton" to="HealthBar" method="_on_invincible_button_button_up"]
-[connection signal="pressed" from="VBoxContainer/RefillHealthButton" to="HealthBar" method="_on_refill_health_button_pressed"]
+[connection signal="button_down" from="DebugContainer/GameOverButton" to="HealthBar" method="_on_game_over_button_button_down"]
+[connection signal="button_down" from="DebugContainer/InvincibleButton" to="HealthBar" method="_on_invincible_button_button_down"]
+[connection signal="button_up" from="DebugContainer/InvincibleButton" to="HealthBar" method="_on_invincible_button_button_up"]
+[connection signal="pressed" from="DebugContainer/RefillHealthButton" to="HealthBar" method="_on_refill_health_button_pressed"]
