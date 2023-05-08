@@ -13,7 +13,7 @@ signal game_over
 @export var bullet_scene: PackedScene
 @export var max_health:= 20
 
-@onready var torso = get_node("Torso")
+@onready var torso = get_node("Torso/Guns")
 @onready var health = max_health
 @onready var invincible := false
 
@@ -21,7 +21,7 @@ func _ready():
 	health_adjust.emit(health)
 
 func _physics_process(delta):
-	check_death()
+	
 	# Add the gravity.
 
 	torso.look_at(screen_point_to_ray())
@@ -74,6 +74,7 @@ func take_damage(damage_value):
 		return
 	health -= damage_value
 	health_adjust.emit(health)
+	check_death()
 
 func take_heal(heal_value):
 	health += heal_value

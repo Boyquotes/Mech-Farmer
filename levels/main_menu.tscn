@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://blohyt13qg6mu"]
+
+[ext_resource type="Script" path="res://scripts/levels/main_menu/MainMenu.gd" id="1_vr7rd"]
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_vr7rd")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VFlowContainer" type="VFlowContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -337.0
+offset_top = -133.0
+offset_right = -37.0
+offset_bottom = 130.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Control/VFlowContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "START"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 163.0
+grow_horizontal = 2
+text = "MECH FARMER"
+fit_content = true
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_top = 115.0
+offset_right = 797.0
+offset_bottom = 644.0
+
+[connection signal="button_up" from="Control/VFlowContainer/Button" to="." method="_on_button_button_up"]

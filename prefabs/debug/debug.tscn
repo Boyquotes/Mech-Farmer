@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj5dbprlybiy6"]
+
+[ext_resource type="Script" path="res://scripts/debug/Debug.gd" id="1_rmi5g"]
+
+[node name="Debug" type="Node"]
+script = ExtResource("1_rmi5g")
+
+[node name="DebugContainer" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -328.0
+offset_bottom = 335.0
+grow_horizontal = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="DebugContainer"]
+layout_mode = 2
+text = "DEBUG MENU"
+fit_content = true
+
+[node name="GameOverButton" type="Button" parent="DebugContainer"]
+layout_mode = 2
+tooltip_text = "Will set player health to 0"
+text = "Force Game Over"
+
+[node name="InvincibleButton" type="Button" parent="DebugContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Invincibility"
+
+[node name="RefillHealthButton" type="Button" parent="DebugContainer"]
+layout_mode = 2
+text = "Refill Health
+"
+
+[connection signal="button_down" from="DebugContainer/GameOverButton" to="." method="_on_game_over_button_button_down"]
+[connection signal="button_down" from="DebugContainer/InvincibleButton" to="." method="_on_invincible_button_button_down"]
+[connection signal="button_up" from="DebugContainer/InvincibleButton" to="." method="_on_invincible_button_button_up"]
+[connection signal="pressed" from="DebugContainer/RefillHealthButton" to="." method="_on_refill_health_button_pressed"]
