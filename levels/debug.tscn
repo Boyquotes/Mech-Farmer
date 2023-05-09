@@ -1,9 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://0tjw4dcs7uqb"]
+[gd_scene load_steps=9 format=3 uid="uid://b2jykexgxnvcd"]
 
-[ext_resource type="Script" path="res://scripts/ui/HealthBar.gd" id="1_8p34s"]
-[ext_resource type="Script" path="res://scripts/ui/GameOver.gd" id="2_ns16v"]
-[ext_resource type="PackedScene" uid="uid://dj5dbprlybiy6" path="res://prefabs/debug/debug.tscn" id="3_7a4yb"]
-[ext_resource type="PackedScene" uid="uid://becp2cx45xflu" path="res://prefabs/characters/player.tscn" id="4_pqnvq"]
+[ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="2_v0idh"]
+[ext_resource type="PackedScene" uid="uid://dqn38xb82d6ls" path="res://prefabs/debug/debug.tscn" id="3_7a4yb"]
+[ext_resource type="Script" path="res://scripts/ui/game_over.gd" id="3_cpks7"]
+[ext_resource type="PackedScene" uid="uid://bj4xgn05k5xvf" path="res://prefabs/characters/player.tscn" id="4_pqnvq"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_wgnmo"]
 
@@ -21,11 +21,6 @@ size = Vector3(60, 2, 60)
 
 [node name="DebugMenu" parent="." instance=ExtResource("3_7a4yb")]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999976, 0.00698126, 0, -0.0049365, 0.70709, 0.707107, 0.0049365, -0.70709, 0.707107, 0, 8.1814, 7.59706)
-current = true
-fov = 37.8493
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.02755, 0)
 
@@ -37,7 +32,7 @@ offset_right = 490.0
 offset_bottom = 59.0
 max_value = 20.0
 step = 1.0
-script = ExtResource("1_8p34s")
+script = ExtResource("2_v0idh")
 
 [node name="GameOver" type="ColorRect" parent="."]
 visible = false
@@ -47,7 +42,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.305882, 0, 0.0196078, 0.45098)
-script = ExtResource("2_ns16v")
+script = ExtResource("3_cpks7")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="GameOver"]
 layout_mode = 1
@@ -85,6 +80,11 @@ text = "Try Again
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07451, 0)
 
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(0.999976, 0.00698126, 0, -0.0049365, 0.70709, 0.707107, 0.0049365, -0.70709, 0.707107, 0, 9.43777, 11.3979)
+current = true
+fov = 37.8493
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6363, 2.01678, 0)
 mesh = SubResource("BoxMesh_wgnmo")
@@ -98,5 +98,3 @@ shape = SubResource("BoxShape3D_4yuv3")
 mesh = SubResource("BoxMesh_cjdg6")
 
 [connection signal="pressed" from="GameOver/Button" to="GameOver" method="_on_button_pressed"]
-[connection signal="game_over" from="Player" to="GameOver" method="_on_player_game_over"]
-[connection signal="health_adjust" from="Player" to="HealthBar" method="_on_player_health_adjust"]

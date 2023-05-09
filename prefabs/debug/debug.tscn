@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj5dbprlybiy6"]
+[gd_scene load_steps=2 format=3 uid="uid://dqn38xb82d6ls"]
 
-[ext_resource type="Script" path="res://scripts/debug/Debug.gd" id="1_rmi5g"]
+[ext_resource type="Script" path="res://scripts/debug/debug.gd" id="1_aaavw"]
 
 [node name="Debug" type="Node"]
-script = ExtResource("1_rmi5g")
+script = ExtResource("1_aaavw")
 
 [node name="DebugContainer" type="VBoxContainer" parent="."]
 visible = false

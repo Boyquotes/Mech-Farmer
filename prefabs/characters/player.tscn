@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://becp2cx45xflu"]
+[gd_scene load_steps=8 format=3 uid="uid://bj4xgn05k5xvf"]
 
-[ext_resource type="Script" path="res://scripts/Player.gd" id="1_mjs8s"]
+[ext_resource type="Script" path="res://scripts/player/state_machine.gd" id="1_asilg"]
+[ext_resource type="Script" path="res://scripts/player/states/motion/on_ground/idle.gd" id="2_7yaib"]
+[ext_resource type="Script" path="res://scripts/player/states/motion/on_ground/move.gd" id="3_oi43o"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uowiw"]
 
@@ -13,7 +15,7 @@ size = Vector3(0.25, 0.25, 1.593)
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07451, 0)
-script = ExtResource("1_mjs8s")
+script = ExtResource("1_asilg")
 
 [node name="Torso" type="Node3D" parent="."]
 
@@ -54,7 +56,7 @@ mesh = SubResource("BoxMesh_7kcu7")
 [node name="States" type="Node" parent="."]
 
 [node name="Idle" type="Node" parent="States"]
+script = ExtResource("2_7yaib")
 
 [node name="Move" type="Node" parent="States"]
-
-[node name="Shooting" type="Node" parent="States"]
+script = ExtResource("3_oi43o")
