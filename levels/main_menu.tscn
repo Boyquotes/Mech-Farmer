@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://blohyt13qg6mu"]
+[gd_scene load_steps=2 format=3 uid="uid://dopkn64kogjll"]
 
-[ext_resource type="Script" path="res://scripts/levels/main_menu/MainMenu.gd" id="1_vr7rd"]
+[ext_resource type="Script" path="res://scripts/levels/main_menu/main_menu.gd" id="1_pcw7n"]
 
 [node name="MainMenu" type="Node"]
-script = ExtResource("1_vr7rd")
+script = ExtResource("1_pcw7n")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

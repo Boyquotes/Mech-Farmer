@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://e5ph860sy4bu"]
+
+[ext_resource type="Script" path="res://scripts/enemy/basic/state_machine.gd" id="1_8lni6"]
+[ext_resource type="Script" path="res://scripts/enemy/basic/states/motion/on_ground/idle.gd" id="2_gy4hf"]
+[ext_resource type="Script" path="res://scripts/enemy/basic/states/motion/on_ground/move.gd" id="3_0cequ"]
+[ext_resource type="Script" path="res://scripts/ui/debug/enemy_states_label.gd" id="4_tgawt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gkd1o"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5qmyi"]
+
+[node name="Enemy00" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.311, 1.53501, 0)
+script = ExtResource("1_8lni6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_gkd1o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_5qmyi")
+
+[node name="States" type="Node" parent="."]
+
+[node name="Idle" type="Node" parent="States"]
+script = ExtResource("2_gy4hf")
+
+[node name="Move" type="Node" parent="States"]
+script = ExtResource("3_0cequ")
+
+[node name="StatesLabel3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28915, 0)
+text = "Hallo
+"
+script = ExtResource("4_tgawt")
+
+[connection signal="state_changed" from="." to="StatesLabel3D" method="_on_enemy_00_state_changed"]
