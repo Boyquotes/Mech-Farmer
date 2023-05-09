@@ -6,7 +6,7 @@ const SPEED = 5.0
 
 func enter():
 	speed = 0.0
-	velocity = Vector3()
+	# owner.velocity = Vector3()
 
 func hundle_input(event):
 	return super.handle_input(event)

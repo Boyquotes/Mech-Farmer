@@ -4,8 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dqn38xb82d6ls" path="res://prefabs/debug/debug.tscn" id="3_7a4yb"]
 [ext_resource type="Script" path="res://scripts/ui/game_over.gd" id="3_cpks7"]
 [ext_resource type="PackedScene" uid="uid://bj4xgn05k5xvf" path="res://prefabs/characters/player.tscn" id="4_pqnvq"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_wgnmo"]
+[ext_resource type="PackedScene" uid="uid://e5ph860sy4bu" path="res://prefabs/characters/enemy_00.tscn" id="5_5ius6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4yuv3"]
 size = Vector3(60, 2, 60)
@@ -85,10 +84,6 @@ transform = Transform3D(0.999976, 0.00698126, 0, -0.0049365, 0.70709, 0.707107, 
 current = true
 fov = 37.8493
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.6363, 2.01678, 0)
-mesh = SubResource("BoxMesh_wgnmo")
-
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
@@ -96,5 +91,7 @@ shape = SubResource("BoxShape3D_4yuv3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_cjdg6")
+
+[node name="Enemy" parent="." instance=ExtResource("5_5ius6")]
 
 [connection signal="pressed" from="GameOver/Button" to="GameOver" method="_on_button_pressed"]
