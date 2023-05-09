@@ -6,7 +6,6 @@
 script = ExtResource("1_aaavw")
 
 [node name="DebugContainer" type="VBoxContainer" parent="."]
-visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -14,7 +13,7 @@ offset_left = -328.0
 offset_bottom = 335.0
 grow_horizontal = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="DebugContainer"]
+[node name="DebugLabel" type="RichTextLabel" parent="DebugContainer"]
 layout_mode = 2
 text = "DEBUG MENU"
 fit_content = true
@@ -33,6 +32,11 @@ text = "Invincibility"
 layout_mode = 2
 text = "Refill Health
 "
+
+[node name="StatesLabel" type="RichTextLabel" parent="DebugContainer"]
+layout_mode = 2
+text = "PLAYER STATES TEXT"
+fit_content = true
 
 [connection signal="button_down" from="DebugContainer/GameOverButton" to="." method="_on_game_over_button_button_down"]
 [connection signal="button_down" from="DebugContainer/InvincibleButton" to="." method="_on_invincible_button_button_down"]

@@ -13,7 +13,6 @@ var current_state = null
 
 func _ready():
 	for state_node in $States.get_children():
-		print(state_node.name)
 		state_node.finished.connect(_change_state)
 	states_stack.push_front($States/Idle)
 	current_state = states_stack[0]
@@ -35,3 +34,4 @@ func _change_state(state_name):
 	if state_name != "previous":
 		current_state.enter()
 	emit_signal("state_changed", states_stack)
+

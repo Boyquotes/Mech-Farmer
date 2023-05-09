@@ -95,3 +95,4 @@ mesh = SubResource("BoxMesh_cjdg6")
 [node name="Enemy" parent="." instance=ExtResource("5_5ius6")]
 
 [connection signal="pressed" from="GameOver/Button" to="GameOver" method="_on_button_pressed"]
+[connection signal="state_changed" from="Player" to="DebugMenu" method="_on_player_state_changed"]
