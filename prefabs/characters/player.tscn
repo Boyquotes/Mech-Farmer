@@ -18,6 +18,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07451, 0)
 script = ExtResource("1_asilg")
 
 [node name="Torso" type="Node3D" parent="."]
+transform = Transform3D(0.999999, 0.000911769, -0.000958308, -0.000910705, 0.999999, 0.00111214, 0.000959319, -0.00111126, 0.999999, 0, 0, 0)
 
 [node name="TorsoMesh" type="MeshInstance3D" parent="Torso"]
 mesh = SubResource("CapsuleMesh_uowiw")
