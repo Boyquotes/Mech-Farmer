@@ -21,7 +21,9 @@ func update(delta):
 	# aim_mouse()
 	aim_controller(delta)
 	if Input.is_action_pressed("fire_1"):
-		fire_primary_1()
+		primary_gun_1.fire()
+	if Input.is_action_pressed("fire_2"):
+		primary_gun_2.fire()
 	
 func move(input_dir):
 	var direction = (owner.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bj4xgn05k5xvf"]
+[gd_scene load_steps=10 format=3 uid="uid://bj4xgn05k5xvf"]
 
 [ext_resource type="Script" path="res://scripts/player/state_machine.gd" id="1_asilg"]
 [ext_resource type="Script" path="res://scripts/player/states/motion/on_ground/idle.gd" id="2_7yaib"]
+[ext_resource type="PackedScene" uid="uid://cxqlokkkhycb7" path="res://prefabs/characters/primary_weapons/debug_cannon.tscn" id="2_rrsmg"]
 [ext_resource type="PackedScene" uid="uid://chf5iy4cu6p6o" path="res://prefabs/projectiles/bullet.tscn" id="3_1sbsc"]
 [ext_resource type="Script" path="res://scripts/player/states/motion/on_ground/move.gd" id="3_oi43o"]
 
@@ -27,37 +28,35 @@ transform = Transform3D(0.999999, 0.000911769, -0.000958308, -0.000910705, 0.999
 mesh = SubResource("CapsuleMesh_uowiw")
 skeleton = NodePath("../..")
 
-[node name="Guns" type="Node3D" parent="Torso"]
+[node name="PrimarySlot1" type="Node3D" parent="Torso"]
+transform = Transform3D(1, 1.78488e-11, 0, 1.42109e-11, 1, 0, 1.74623e-10, -3.49246e-10, 1, -0.594656, 0.161992, -0.304177)
 
-[node name="PrimaryGuns" type="Node3D" parent="Torso/Guns"]
+[node name="PrimaryGun1" parent="Torso/PrimarySlot1" instance=ExtResource("2_rrsmg")]
+transform = Transform3D(1, -4.00178e-11, 0, 7.25322e-11, 1, 0, 0, 1.16415e-10, 1, 5.96046e-08, 0, 2.98023e-08)
+skeleton = NodePath("../../..")
 
-[node name="PrimaryGun1" type="MeshInstance3D" parent="Torso/Guns/PrimaryGuns"]
-transform = Transform3D(1, 1.80762e-11, 0, 1.45519e-11, 1, 0, 5.82077e-11, -1.16415e-10, 1, -0.594656, 0.161992, -0.304177)
-mesh = SubResource("BoxMesh_gtv21")
-skeleton = NodePath("../../../..")
+[node name="PrimarySlot2" type="Node3D" parent="Torso"]
+transform = Transform3D(1, 1.83036e-11, 0, 1.42109e-11, 1, -2.32831e-10, 4.07454e-10, -1.16415e-10, 1, 0.556247, 0.163041, -0.30528)
 
-[node name="BulletSpawn" type="Node3D" parent="Torso/Guns/PrimaryGuns/PrimaryGun1"]
-transform = Transform3D(1, 1.83036e-11, 0, 1.44382e-11, 1, -1.16415e-10, 1.16415e-10, 1.16415e-10, 1, -0.000822842, 0.000952959, -0.857732)
+[node name="PrimaryGun2" parent="Torso/PrimarySlot2" instance=ExtResource("2_rrsmg")]
+transform = Transform3D(1, 1.83036e-11, 0, 1.43245e-11, 1, 0, 0, 0, 1, -5.96046e-08, 0, 2.98023e-08)
+skeleton = NodePath("../../..")
 
-[node name="PrimaryGun2" type="MeshInstance3D" parent="Torso/Guns/PrimaryGuns"]
-transform = Transform3D(1, 1.80762e-11, 0, 1.45519e-11, 1, 0, 5.82077e-11, -1.16415e-10, 1, 0.643273, 0.166174, -0.304177)
-mesh = SubResource("BoxMesh_gtv21")
-skeleton = NodePath("../../../..")
-
-[node name="BulletSpawn" type="Node3D" parent="Torso/Guns/PrimaryGuns/PrimaryGun2"]
-transform = Transform3D(1, 1.8531e-11, 0, 1.44382e-11, 1, -2.32831e-10, 2.32831e-10, 2.32831e-10, 1, -0.000815928, 0.00094533, -0.850669)
-
-[node name="SecondaryGuns" type="Node3D" parent="Torso/Guns"]
-
-[node name="SecondaryGun1" type="MeshInstance3D" parent="Torso/Guns/SecondaryGuns"]
+[node name="SecondarySlot1" type="Node3D" parent="Torso"]
 transform = Transform3D(1, 0.00128581, 0.000310462, -0.000374036, 0.5, -0.866026, -0.00126877, 0.866025, 0.500001, 0.644041, 0.664011, 0.495822)
-mesh = SubResource("BoxMesh_gtv21")
-skeleton = NodePath("../../../..")
 
-[node name="SecondaryGun2" type="MeshInstance3D" parent="Torso/Guns/SecondaryGuns"]
-transform = Transform3D(1, 0.0012858, 0.000310462, -0.000374036, 0.5, -0.866026, -0.00126877, 0.866025, 0.500001, -0.593889, 0.664011, 0.495822)
+[node name="SecondaryGun1" type="MeshInstance3D" parent="Torso/SecondarySlot1"]
+transform = Transform3D(1, -8.73115e-11, -1.60071e-10, -1.16415e-10, 1, 2.98023e-08, -7.27596e-11, 0, 1, -5.96046e-08, 0, 0)
 mesh = SubResource("BoxMesh_gtv21")
-skeleton = NodePath("../../../..")
+skeleton = NodePath("../../..")
+
+[node name="SecondarySlot2" type="Node3D" parent="Torso"]
+transform = Transform3D(1, 0.0012858, 0.000310462, -0.000374036, 0.5, -0.866026, -0.00126877, 0.866025, 0.500001, -0.593889, 0.664011, 0.495822)
+
+[node name="SecondaryGun2" type="MeshInstance3D" parent="Torso/SecondarySlot2"]
+transform = Transform3D(1, -8.73115e-11, -1.16415e-10, -1.16415e-10, 1, 2.98023e-08, -7.27596e-11, 0, 1, 5.96046e-08, 0, 0)
+mesh = SubResource("BoxMesh_gtv21")
+skeleton = NodePath("../../..")
 
 [node name="BaseCollision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.547985, 0)
