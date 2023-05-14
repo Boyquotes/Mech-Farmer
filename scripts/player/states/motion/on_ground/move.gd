@@ -17,9 +17,9 @@ func update(delta):
 		emit_signal("finished", "idle")
 
 	move(input_direction)
-	# screen_point_to_ray()
-	# torso.look_at(screen_point_to_ray())
-	aim_towards(delta)
+	# TODO: Figure out toggle between mouse and controller
+	# aim_mouse()
+	aim_controller(delta)
 	
 func move(input_dir):
 	var direction = (owner.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

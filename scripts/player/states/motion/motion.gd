@@ -10,7 +10,7 @@ func get_input_direction():
 	return input_direction
 
 
-func screen_point_to_ray():
+func aim_mouse():
 	var space_state = owner.get_world_3d().direct_space_state
 	var mouse_pos = get_viewport().get_mouse_position()
 	var camera = get_tree().root.get_camera_3d()
@@ -20,11 +20,14 @@ func screen_point_to_ray():
 	var ray_properties = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
 	var ray_array = space_state.intersect_ray(ray_properties)
 
+	var hit_pos
 	if ray_array.has("position"):
-		return ray_array["position"]
-	return Vector3()
+		hit_pos = ray_array["position"]
+	hit_pos = Vector3()
 
-func aim_towards(delta):
+	torso.look_at(hit_pos)
+
+func aim_controller(delta):
 	var rotation_speed = 10
 	var joystick = Input.get_vector("look_left", "look_right", "look_up", "look_down")
 
