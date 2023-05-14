@@ -71,7 +71,9 @@ mesh = SubResource("BoxMesh_7kcu7")
 [node name="Idle" type="Node" parent="States"]
 script = ExtResource("2_7yaib")
 projectile_scene = ExtResource("3_1sbsc")
+projectile_speed = null
 
 [node name="Move" type="Node" parent="States"]
 script = ExtResource("3_oi43o")
 projectile_scene = ExtResource("3_1sbsc")
+projectile_speed = null

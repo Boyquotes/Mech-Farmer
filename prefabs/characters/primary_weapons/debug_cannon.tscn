@@ -15,3 +15,8 @@ projectile_scene = ExtResource("2_t5mog")
 
 [node name="BulletSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 1.83036e-11, 0, 1.44382e-11, 1, -1.16415e-10, 1.16415e-10, 1.16415e-10, 1, -0.000822842, 0.000952959, -0.857732)
+
+[node name="FireRateTimer" type="Timer" parent="."]
+wait_time = 0.3
+
+[connection signal="timeout" from="FireRateTimer" to="." method="_on_timer_timeout"]
