@@ -80,7 +80,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07451, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(0.999976, 0.00698126, 0, -0.0049365, 0.70709, 0.707107, 0.0049365, -0.70709, 0.707107, 0, 9.43777, 11.3979)
+transform = Transform3D(1, 0, 0, 0, 0.776002, 0.63073, 0, -0.63073, 0.776002, 0, 9.22436, 10.5203)
 current = true
 fov = 37.8493
 
