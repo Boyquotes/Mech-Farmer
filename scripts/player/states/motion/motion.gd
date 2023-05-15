@@ -2,8 +2,10 @@ extends "../state.gd"
 
 
 @onready var torso = owner.get_node("Torso")
-@onready var primary_gun_1 = torso.get_node("PrimarySlot1/PrimaryGun1")
-@onready var primary_gun_2 = torso.get_node("PrimarySlot2/PrimaryGun2")
+@onready var primary_gun_1 = torso.get_node("PrimarySlot1/PrimaryGun")
+@onready var primary_gun_2 = torso.get_node("PrimarySlot2/PrimaryGun")
+
+var is_controller = true
 
 func get_input_direction():
 	var input_direction = Vector2()
@@ -24,8 +26,9 @@ func aim_mouse():
 
 	var hit_pos
 	if ray_array.has("position"):
-		hit_pos = ray_array["position"]
-	hit_pos = Vector3()
+		hit_pos = ray_array["position"] + Vector3(0,1,0)
+	else:
+		hit_pos = Vector3()
 
 	torso.look_at(hit_pos)
 
@@ -37,3 +40,15 @@ func aim_controller(delta):
 		var look_direction := joystick.normalized()
 		var target_rotation := look_direction.angle_to(Vector2(0,1) * -1)
 		torso.rotation.y = lerp_angle(torso.rotation.y, target_rotation, delta * rotation_speed)
+
+func aim_controls(delta):
+	if is_controller:
+		aim_controller(delta)
+	else:
+		aim_mouse()
+
+func _input(event):
+	if event is InputEventMouseButton:
+		is_controller = false
+	elif event is InputEventJoypadButton:
+		is_controller = true

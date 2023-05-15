@@ -17,9 +17,7 @@ func update(delta):
 		emit_signal("finished", "idle")
 
 	move(input_direction)
-	# TODO: Figure out toggle between mouse and controller
-	# aim_mouse()
-	aim_controller(delta)
+	aim_controls(delta)
 	if Input.is_action_pressed("fire_1"):
 		primary_gun_1.fire()
 	if Input.is_action_pressed("fire_2"):

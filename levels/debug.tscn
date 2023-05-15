@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2jykexgxnvcd"]
+[gd_scene load_steps=10 format=3 uid="uid://b2jykexgxnvcd"]
 
 [ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="2_v0idh"]
 [ext_resource type="PackedScene" uid="uid://dqn38xb82d6ls" path="res://prefabs/debug/debug.tscn" id="3_7a4yb"]
 [ext_resource type="Script" path="res://scripts/ui/game_over.gd" id="3_cpks7"]
 [ext_resource type="PackedScene" uid="uid://bj4xgn05k5xvf" path="res://prefabs/characters/player.tscn" id="4_pqnvq"]
 [ext_resource type="PackedScene" uid="uid://e5ph860sy4bu" path="res://prefabs/characters/enemy_00.tscn" id="5_5ius6"]
+[ext_resource type="Script" path="res://scripts/levels/game_manager/game_manager.gd" id="6_c4vho"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4yuv3"]
 size = Vector3(60, 2, 60)
@@ -78,6 +79,7 @@ text = "Try Again
 [node name="Player" parent="." instance=ExtResource("4_pqnvq")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07451, 0)
+collision_layer = 3
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.776002, 0.63073, 0, -0.63073, 0.776002, 0, 9.22436, 10.5203)
@@ -85,6 +87,8 @@ current = true
 fov = 37.8493
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 16
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_4yuv3")
@@ -93,6 +97,9 @@ shape = SubResource("BoxShape3D_4yuv3")
 mesh = SubResource("BoxMesh_cjdg6")
 
 [node name="Enemy" parent="." instance=ExtResource("5_5ius6")]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("6_c4vho")
 
 [connection signal="pressed" from="GameOver/Button" to="GameOver" method="_on_button_pressed"]
 [connection signal="state_changed" from="Player" to="DebugMenu" method="_on_player_state_changed"]
