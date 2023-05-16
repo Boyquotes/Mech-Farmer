@@ -5,18 +5,20 @@ signal state_changed
 var states_stack = []
 var current_state = null
 
-@export var max_health:= 20
+@export var max_health:= 10
 
 @onready var health = max_health
 @onready var invincible := false
 
-@onready var target = get_node("%Player")
+@export var target: Node3D
 @onready var states_map = {
 	"idle": $States/Idle,
 	"move": $States/Move,
 }
 
 func _ready():
+	if target == null:
+		target = get_node("%Player")
 	for state_node in $States.get_children():
 		state_node.finished.connect(_change_state)
 	states_stack.push_front($States/Idle)

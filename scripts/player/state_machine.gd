@@ -8,7 +8,6 @@ var current_state = null
 signal health_adjust(health_value)
 signal game_over
 
-@export var bullet_scene: PackedScene
 @export var max_health:= 20
 
 @onready var health = max_health

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b2jykexgxnvcd"]
+[gd_scene load_steps=12 format=3 uid="uid://b2jykexgxnvcd"]
 
 [ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="2_v0idh"]
 [ext_resource type="PackedScene" uid="uid://dqn38xb82d6ls" path="res://prefabs/debug/debug.tscn" id="3_7a4yb"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bj4xgn05k5xvf" path="res://prefabs/characters/player.tscn" id="4_pqnvq"]
 [ext_resource type="PackedScene" uid="uid://e5ph860sy4bu" path="res://prefabs/characters/enemy_00.tscn" id="5_5ius6"]
 [ext_resource type="Script" path="res://scripts/levels/game_manager/game_manager.gd" id="6_c4vho"]
+[ext_resource type="PackedScene" uid="uid://uclavqvecf70" path="res://models/characters/enemy-spawner.glb" id="7_gk8rr"]
+[ext_resource type="Script" path="res://scripts/enemy/spawner/enemy_spawner.gd" id="8_24b0f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4yuv3"]
 size = Vector3(60, 2, 60)
@@ -102,5 +104,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.67098, 1.5, 0)
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("6_c4vho")
 
+[node name="Enemy00" parent="." instance=ExtResource("5_5ius6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3126, 2, 16.4003)
+
+[node name="Enemy01" parent="." instance=ExtResource("5_5ius6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13802, 2, 19.7269)
+
+[node name="enemy-spawner" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_gk8rr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5233, 1, 20.2692)
+script = ExtResource("8_24b0f")
+enemy_scene = ExtResource("5_5ius6")
+target = NodePath("../Player")
+
+[node name="CanSpawnTimer" type="Timer" parent="enemy-spawner"]
+autostart = true
+
 [connection signal="pressed" from="GameOver/Button" to="GameOver" method="_on_button_pressed"]
 [connection signal="state_changed" from="Player" to="DebugMenu" method="_on_player_state_changed"]
+[connection signal="timeout" from="enemy-spawner/CanSpawnTimer" to="enemy-spawner" method="_on_can_spawn_timer_timeout"]
