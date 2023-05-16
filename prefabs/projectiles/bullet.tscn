@@ -7,6 +7,9 @@
 [sub_resource type="PrismMesh" id="PrismMesh_t8a45"]
 
 [node name="Bullet" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 4
+gravity_scale = 0.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_tknyc")
