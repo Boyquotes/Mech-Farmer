@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://chf5iy4cu6p6o"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_tknyc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_07err"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_t8a45"]
+
+[node name="Bullet" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 4
+gravity_scale = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_tknyc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_07err")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.740783)
+mesh = SubResource("PrismMesh_t8a45")
