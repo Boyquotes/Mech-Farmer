@@ -11,8 +11,6 @@ signal game_over
 @export var bullet_scene: PackedScene
 @export var max_health:= 20
 
-@onready var torso = get_node("Torso/Guns")
-
 @onready var health = max_health
 @onready var invincible := false
 

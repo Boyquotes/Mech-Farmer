@@ -97,6 +97,7 @@ shape = SubResource("BoxShape3D_4yuv3")
 mesh = SubResource("BoxMesh_cjdg6")
 
 [node name="Enemy" parent="." instance=ExtResource("5_5ius6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.67098, 1.5, 0)
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("6_c4vho")

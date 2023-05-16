@@ -5,6 +5,11 @@ signal state_changed
 var states_stack = []
 var current_state = null
 
+@export var max_health:= 20
+
+@onready var health = max_health
+@onready var invincible := false
+
 @onready var target = get_node("%Player")
 @onready var states_map = {
 	"idle": $States/Idle,
@@ -35,3 +40,13 @@ func _change_state(state_name):
 		current_state.enter()
 	emit_signal("state_changed", states_stack)
 
+func take_damage(damage_value):
+	if invincible:
+		return
+	health -= damage_value
+	# health_adjust.emit(health)
+	check_death()
+
+func check_death():
+	if health <= 0:
+		queue_free()
