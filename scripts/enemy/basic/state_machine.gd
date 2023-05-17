@@ -6,19 +6,20 @@ var states_stack = []
 var current_state = null
 
 @export var max_health:= 10
+@export var target_node: Node3D
 
+@onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var health = max_health
 @onready var invincible := false
 
-@export var target: Node3D
 @onready var states_map = {
 	"idle": $States/Idle,
 	"move": $States/Move,
 }
 
 func _ready():
-	if target == null:
-		target = get_node("%Player")
+	# if target_node == null:
+	# 	target_node = get_node("%Player")
 	for state_node in $States.get_children():
 		state_node.finished.connect(_change_state)
 	states_stack.push_front($States/Idle)
@@ -41,6 +42,19 @@ func _change_state(state_name):
 	if state_name != "previous":
 		current_state.enter()
 	emit_signal("state_changed", states_stack)
+
+func ready_navigation():
+	# These values need to be adjusted for the actor's speed
+	# and the navigation layout.
+	navigation_agent.path_desired_distance = 0.5
+	navigation_agent.target_desired_distance = 0.5
+
+	# Make sure to not await during _ready.
+	call_deferred("actor_setup")
+
+func actor_setup():
+	# Wait for the first physics frame so the NavigationServer can sync.
+	await get_tree().physics_frame
 
 func take_damage(damage_value):
 	if invincible:

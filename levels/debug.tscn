@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b2jykexgxnvcd"]
+[gd_scene load_steps=13 format=3 uid="uid://b2jykexgxnvcd"]
 
 [ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="2_v0idh"]
 [ext_resource type="PackedScene" uid="uid://dqn38xb82d6ls" path="res://prefabs/debug/debug.tscn" id="3_7a4yb"]
@@ -9,8 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://uclavqvecf70" path="res://models/characters/enemy-spawner.glb" id="7_gk8rr"]
 [ext_resource type="Script" path="res://scripts/enemy/spawner/enemy_spawner.gd" id="8_24b0f"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4yuv3"]
-size = Vector3(60, 2, 60)
+[sub_resource type="NavigationMesh" id="NavigationMesh_vkg2g"]
+vertices = PackedVector3Array(-22.25, 1.5, -29.5, -29.5, 1.5, -29.5, -29.5, 1.5, -22.25, -29.5, 1.5, 22, -29.5, 1.5, 29.5, -22.25, 1.5, 29.5, 29.5, 1.5, -22.25, 29.5, 1.5, -29.5, 22, 1.5, -29.5, 22, 1.5, 29.5, 29.5, 1.5, 29.5, 29.5, 1.5, 22, -29.5, 1.5, 14.75, -29.5, 1.5, 22, -22.25, 1.5, 29.5, -14.75, 1.5, 29.5, 29.5, 1.5, -22.25, 22, 1.5, -29.5, 14.75, 1.5, -29.5, 29.5, 1.5, -14.75, -14.75, 1.5, -29.5, -22.25, 1.5, -29.5, -29.5, 1.5, -22.25, -29.5, 1.5, -14.75, 14.75, 1.5, 29.5, 22, 1.5, 29.5, 29.5, 1.5, 22, 7.25, 1.5, 29.5, 29.5, 1.5, 14.75, 29.5, 1.5, 7.25, 0, 1.5, 29.5, 14.75, 1.5, 29.5, 29.5, 1.5, 22, 29.5, 1.5, 14.75, 7.25, 1.5, 29.5, 0, 1.5, -29.5, -7.5, 1.5, -29.5, -29.5, 1.5, -7.5, -29.5, 1.5, 0, 29.5, 1.5, 0, 0, 1.5, -29.5, -29.5, 1.5, 0, -7.5, 1.5, 29.5, 0, 1.5, 29.5, 29.5, 1.5, 7.25, -29.5, 1.5, 14.75, -14.75, 1.5, 29.5, -7.5, 1.5, 29.5, -29.5, 1.5, 7.25, 29.5, 1.5, -7.5, 29.5, 1.5, -14.75, 14.75, 1.5, -29.5, 7.25, 1.5, -29.5, -7.5, 1.5, -29.5, -14.75, 1.5, -29.5, -29.5, 1.5, -14.75, -29.5, 1.5, -7.5, -29.5, 1.5, 0, -29.5, 1.5, 7.25, -7.5, 1.5, 29.5, 29.5, 1.5, -7.5, 7.25, 1.5, -29.5, 0, 1.5, -29.5, 29.5, 1.5, 0)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(11, 10, 9), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(26, 25, 24), PackedInt32Array(28, 27, 29), PackedInt32Array(29, 27, 30), PackedInt32Array(32, 31, 33), PackedInt32Array(33, 31, 34), PackedInt32Array(36, 35, 37), PackedInt32Array(37, 35, 38), PackedInt32Array(44, 43, 39), PackedInt32Array(39, 43, 42), PackedInt32Array(39, 42, 41), PackedInt32Array(39, 41, 40), PackedInt32Array(46, 45, 47), PackedInt32Array(47, 45, 48), PackedInt32Array(50, 49, 51), PackedInt32Array(51, 49, 52), PackedInt32Array(54, 53, 55), PackedInt32Array(55, 53, 56), PackedInt32Array(59, 58, 57), PackedInt32Array(61, 60, 62), PackedInt32Array(62, 60, 63)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0f2dy"]
 albedo_color = Color(0.258824, 0.258824, 0.258824, 1)
@@ -19,7 +20,13 @@ albedo_color = Color(0.258824, 0.258824, 0.258824, 1)
 material = SubResource("StandardMaterial3D_0f2dy")
 size = Vector3(60, 2, 60)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4yuv3"]
+size = Vector3(60, 2, 60)
+
 [node name="Debug" type="Node"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("6_c4vho")
 
 [node name="DebugMenu" parent="." instance=ExtResource("3_7a4yb")]
 
@@ -88,33 +95,37 @@ transform = Transform3D(1, 0, 0, 0, 0.776002, 0.63073, 0, -0.63073, 0.776002, 0,
 current = true
 fov = 37.8493
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Floor" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_vkg2g")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_cjdg6")
+skeleton = NodePath("../StaticBody3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("BoxShape3D_4yuv3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_cjdg6")
-
-[node name="Enemy" parent="." instance=ExtResource("5_5ius6")]
+[node name="Enemy" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("5_5ius6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.67098, 1.5, 0)
+target_node = NodePath("../Player")
 
-[node name="GameManager" type="Node" parent="."]
-script = ExtResource("6_c4vho")
-
-[node name="Enemy00" parent="." instance=ExtResource("5_5ius6")]
+[node name="Enemy00" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("5_5ius6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.3126, 2, 16.4003)
+target_node = NodePath("../Player")
 
-[node name="Enemy01" parent="." instance=ExtResource("5_5ius6")]
+[node name="Enemy01" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("5_5ius6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.13802, 2, 19.7269)
+target_node = NodePath("../Player")
 
-[node name="enemy-spawner" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_gk8rr")]
+[node name="enemy-spawner" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("7_gk8rr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5233, 1, 20.2692)
 script = ExtResource("8_24b0f")
 enemy_scene = ExtResource("5_5ius6")
-target = NodePath("../Player")
+target_node = NodePath("../Player")
 
 [node name="CanSpawnTimer" type="Timer" parent="enemy-spawner"]
 autostart = true

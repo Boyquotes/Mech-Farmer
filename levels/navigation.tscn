@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cf85omwgicrew"]
+
+[ext_resource type="Script" path="res://scripts/test/character_navigation.gd" id="1_i2ekh"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_fvv8l"]
+vertices = PackedVector3Array(-4.5, 0.5, -4.5, -4.5, 0.5, 4.5, 4.5, 0.5, 4.5, 4.5, 0.5, -4.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mivpe"]
+size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8b6hy"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f2qpc"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_gi5fo"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_fvv8l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_mivpe")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.554965, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_8b6hy")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45316, 0)
+script = ExtResource("1_i2ekh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_f2qpc")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CharacterBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_gi5fo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.829125, 0.559063, 0, -0.559063, 0.829125, 0, 3.52072, 4.84473)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
