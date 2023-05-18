@@ -16,11 +16,15 @@ func fire():
 		var projectile = projectile_scene.instantiate()  # Create an instance of the projectile scene
 		rocket_spawn.add_child(projectile)  # Add the projectile to the parent node
 		
-		projectile.transform = rocket_spawn.transform  # Set the starting position of the projectile
-
+		projectile.position = rocket_spawn.position  # Set the starting position of the projectile
+		projectile.rotation = rocket_spawn.rotation
 		projectile.target_node = target_node
-		
 		projectile.top_level = true
+		# projectile.rotation.y = projectile.rotation.y + 90
+		# var direction = -rocket_spawn.global_transform.basis.z.normalized()  # Get the direction the projectile should travel
+		
+		# projectile.linear_velocity = direction * projectile_speed  # Set the velocity of the projectile
+		# projectile.look_at(target_node.global_position)
 		
 		can_fire = false
 		fire_rate_timer.start()

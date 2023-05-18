@@ -124,6 +124,7 @@ target_node = NodePath("../Player")
 
 [node name="enemy-spawner" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("7_gk8rr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5233, 1, 20.2692)
+visible = false
 script = ExtResource("8_24b0f")
 enemy_scene = ExtResource("5_5ius6")
 target_node = NodePath("../Player")

@@ -4,16 +4,15 @@ const SPEED = 1000
 
 var target_node: Node3D
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	print("start")
-
+@onready var rocket_mesh = $RocketMesh
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+	# pass
 	var temp_velocity = global_position.direction_to(target_node.global_position)
 	velocity = temp_velocity * SPEED * delta
+	rocket_mesh.rotation.x = rocket_mesh.rotation.x + (1 * delta)
 	
-	print(temp_velocity)
+	look_at(target_node.global_position)
+	
 	move_and_slide()
