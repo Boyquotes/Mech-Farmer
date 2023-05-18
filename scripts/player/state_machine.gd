@@ -1,17 +1,25 @@
 extends CharacterBody3D
 
 signal state_changed
+signal health_adjust(health_value)
+signal game_over
 
 var states_stack = []
 var current_state = null
-
-signal health_adjust(health_value)
-signal game_over
+var lock_on_target
 
 @export var max_health:= 20
 
 @onready var health = max_health
 @onready var invincible := false
+
+@onready var torso = get_node("Torso/Guns")
+@onready var primary_gun_1 = torso.get_node("PrimarySlot1/PrimaryGun")
+@onready var primary_gun_2 = torso.get_node("PrimarySlot2/PrimaryGun")
+@onready var secondary_gun_1 = torso.get_node("SecondarySlot1/SecondaryGun")
+@onready var secondary_gun_2 = torso.get_node("SecondarySlot2/SecondaryGun")
+
+@onready var raycast: RayCast3D = torso.get_node("LockOnRayCast")
 
 @onready var states_map = {
 	"idle": $States/Idle,
@@ -28,6 +36,12 @@ func _ready():
 
 func _physics_process(delta):
 	current_state.update(delta)
+	if raycast.get_collider() != null:
+		# print(raycast.get_collider())
+		lock_on_target = raycast.get_collider()
+	
+	# if lock_on_target != null:
+	# 	print(lock_on_target.global_position)
 
 func _change_state(state_name):
 	current_state.exit()

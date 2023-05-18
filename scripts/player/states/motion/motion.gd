@@ -1,10 +1,5 @@
 extends "../state.gd"
 
-
-@onready var torso = owner.get_node("Torso/Guns")
-@onready var primary_gun_1 = torso.get_node("PrimarySlot1/PrimaryGun")
-@onready var primary_gun_2 = torso.get_node("PrimarySlot2/PrimaryGun")
-
 var is_controller = true
 
 func get_input_direction():
@@ -13,6 +8,17 @@ func get_input_direction():
 	input_direction.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	return input_direction
 
+func get_fire_input():
+	if Input.is_action_pressed("fire_1"):
+		owner.primary_gun_1.fire()
+	if Input.is_action_pressed("fire_2"):
+		owner.primary_gun_2.fire()
+	if Input.is_action_just_pressed("secondary_fire_1"):
+		owner.secondary_gun_1.target_node = owner.lock_on_target
+		owner.secondary_gun_1.fire()
+	if Input.is_action_just_pressed("secondary_fire_2"):
+		owner.secondary_gun_2.target_node = owner.lock_on_target
+		owner.secondary_gun_2.fire()
 
 func aim_mouse():
 	var space_state = owner.get_world_3d().direct_space_state
@@ -30,7 +36,7 @@ func aim_mouse():
 	else:
 		hit_pos = Vector3()
 
-	torso.look_at(hit_pos)
+	owner.torso.look_at(hit_pos)
 
 func aim_controller(delta):
 	var rotation_speed = 10
@@ -39,7 +45,7 @@ func aim_controller(delta):
 	if joystick.length_squared() > 0.1:
 		var look_direction := joystick.normalized()
 		var target_rotation := look_direction.angle_to(Vector2(0,1) * -1)
-		torso.rotation.y = lerp_angle(torso.rotation.y, target_rotation, delta * rotation_speed)
+		owner.torso.rotation.y = lerp_angle(owner.torso.rotation.y, target_rotation, delta * rotation_speed)
 
 func aim_controls(delta):
 	if is_controller:

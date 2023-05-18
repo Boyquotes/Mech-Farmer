@@ -23,5 +23,6 @@ func fire():
 		can_fire = false
 		fire_rate_timer.start()
 
-func _on_timer_timeout():
+func _on_fire_rate_timer_timeout():
 	can_fire = true
+

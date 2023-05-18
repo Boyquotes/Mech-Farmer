@@ -8,9 +8,5 @@ func update(delta):
 	if input_direction:
 		emit_signal("finished", "move")
 	aim_controls(delta)
-	if Input.is_action_pressed("fire_1"):
-		primary_gun_1.fire()
-	if Input.is_action_pressed("fire_2"):
-		primary_gun_2.fire()
-		
+	get_fire_input()
 

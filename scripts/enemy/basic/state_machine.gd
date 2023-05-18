@@ -5,7 +5,7 @@ signal state_changed
 var states_stack = []
 var current_state = null
 
-@export var max_health:= 10
+@export var max_health:= 40
 @export var target_node: Node3D
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
@@ -18,8 +18,6 @@ var current_state = null
 }
 
 func _ready():
-	# if target_node == null:
-	# 	target_node = get_node("%Player")
 	for state_node in $States.get_children():
 		state_node.finished.connect(_change_state)
 	states_stack.push_front($States/Idle)

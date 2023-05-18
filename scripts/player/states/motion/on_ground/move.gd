@@ -1,34 +1,27 @@
 extends "on_ground.gd"
 
-const SPEED = 5.0
-@export var MAX_WALK_SPEED: float = 450
-@export var MAX_RUN_SPEED: float = 700
-
 func enter():
-	speed = 0.0
-	# owner.velocity = Vector3()
+	speed = 10
 
 func hundle_input(event):
 	return super.handle_input(event)
 
 func update(delta):
 	var input_direction = get_input_direction()
+	
 	if input_direction == Vector2():
 		emit_signal("finished", "idle")
 
 	move(input_direction)
 	aim_controls(delta)
-	if Input.is_action_pressed("fire_1"):
-		primary_gun_1.fire()
-	if Input.is_action_pressed("fire_2"):
-		primary_gun_2.fire()
+	get_fire_input()
 	
 func move(input_dir):
 	var direction = (owner.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		owner.velocity.x = direction.x * SPEED
-		owner.velocity.z = direction.z * SPEED
+		owner.velocity.x = direction.x * speed
+		owner.velocity.z = direction.z * speed
 	else:
-		owner.velocity.x = move_toward(velocity.x, 0, SPEED)
-		owner.velocity.z = move_toward(velocity.z, 0, SPEED)
+		owner.velocity.x = move_toward(velocity.x, 0, speed)
+		owner.velocity.z = move_toward(velocity.z, 0, speed)
 	owner.move_and_slide()

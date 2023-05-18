@@ -99,6 +99,7 @@ fov = 37.8493
 navigation_mesh = SubResource("NavigationMesh_vkg2g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+visible = false
 mesh = SubResource("BoxMesh_cjdg6")
 skeleton = NodePath("../StaticBody3D")
 
