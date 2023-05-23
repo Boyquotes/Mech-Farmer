@@ -72,3 +72,10 @@ script = ExtResource("2_7yaib")
 
 [node name="Move" type="Node" parent="States"]
 script = ExtResource("3_oi43o")
+
+[node name="HealRechargeTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="HealRechargeTimer" to="." method="_on_heal_recharge_timer_timeout"]

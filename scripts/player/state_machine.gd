@@ -4,14 +4,15 @@ signal state_changed
 signal health_adjust(health_value)
 signal game_over
 
-var states_stack = []
-var current_state = null
-var lock_on_target
 
-@export var max_health:= 20
 
-@onready var health = max_health
-@onready var invincible := false
+@export var invincible := false
+@export var max_health := 20.0
+@export var heal_charge := 5
+
+@onready var heal_recharge_timer: Timer = get_node("HealRechargeTimer")
+@onready var heal_recharge_wait_time = heal_recharge_timer.wait_time
+
 
 @onready var torso = get_node("Torso/Guns")
 @onready var primary_gun_1 = torso.get_node("PrimarySlot1/PrimaryGun")
@@ -20,6 +21,14 @@ var lock_on_target
 @onready var secondary_gun_2 = torso.get_node("SecondarySlot2/SecondaryGun")
 
 @onready var raycast: RayCast3D = torso.get_node("LockOnRayCast")
+
+var states_stack = []
+var current_state = null
+var lock_on_target
+
+var health := max_health
+var can_heal := false
+
 
 @onready var states_map = {
 	"idle": $States/Idle,
@@ -37,11 +46,9 @@ func _ready():
 func _physics_process(delta):
 	current_state.update(delta)
 	if raycast.get_collider() != null:
-		# print(raycast.get_collider())
 		lock_on_target = raycast.get_collider()
-	
-	# if lock_on_target != null:
-	# 	print(lock_on_target.global_position)
+	if can_heal == true:
+		recharge(delta)
 
 func _change_state(state_name):
 	current_state.exit()
@@ -60,14 +67,30 @@ func _change_state(state_name):
 func take_damage(damage_value):
 	if invincible:
 		return
+	can_heal = false
 	health -= damage_value
 	health_adjust.emit(health)
 	check_death()
+	heal_recharge_timer.stop()
+	heal_recharge_timer.start(heal_recharge_wait_time)
 
 func take_heal(heal_value):
-	health += heal_value
-	health_adjust.emit(health)
+	if health + heal_value > max_health:
+		health = max_health
+		health_adjust.emit(health)
+		can_heal = false
+	else:
+		health += heal_value
+		health_adjust.emit(health)
+	print(health)
 	
 func check_death():
 	if health <= 0:
 		game_over.emit()
+
+func recharge(delta):
+	if can_heal == true:
+		take_heal(heal_charge * delta)
+
+func _on_heal_recharge_timer_timeout():
+	can_heal = true

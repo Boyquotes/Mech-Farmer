@@ -19,5 +19,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000822842, 0.000952957, -0
 
 [node name="FireRateTimer" type="Timer" parent="."]
 wait_time = 0.3
+one_shot = true
 
 [connection signal="timeout" from="FireRateTimer" to="." method="_on_fire_rate_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b2jykexgxnvcd"]
+[gd_scene load_steps=16 format=3 uid="uid://b2jykexgxnvcd"]
 
 [ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="2_v0idh"]
 [ext_resource type="PackedScene" uid="uid://dqn38xb82d6ls" path="res://prefabs/debug/debug.tscn" id="3_7a4yb"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/levels/game_manager/game_manager.gd" id="6_c4vho"]
 [ext_resource type="PackedScene" uid="uid://uclavqvecf70" path="res://models/characters/enemy-spawner.glb" id="7_gk8rr"]
 [ext_resource type="Script" path="res://scripts/enemy/spawner/enemy_spawner.gd" id="8_24b0f"]
+[ext_resource type="Script" path="res://scripts/obstacles/area3d_damage.gd" id="9_ichd7"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_vkg2g"]
 vertices = PackedVector3Array(-22.25, 1.5, -29.5, -29.5, 1.5, -29.5, -29.5, 1.5, -22.25, -29.5, 1.5, 22, -29.5, 1.5, 29.5, -22.25, 1.5, 29.5, 29.5, 1.5, -22.25, 29.5, 1.5, -29.5, 22, 1.5, -29.5, 22, 1.5, 29.5, 29.5, 1.5, 29.5, 29.5, 1.5, 22, -29.5, 1.5, 14.75, -29.5, 1.5, 22, -22.25, 1.5, 29.5, -14.75, 1.5, 29.5, 29.5, 1.5, -22.25, 22, 1.5, -29.5, 14.75, 1.5, -29.5, 29.5, 1.5, -14.75, -14.75, 1.5, -29.5, -22.25, 1.5, -29.5, -29.5, 1.5, -22.25, -29.5, 1.5, -14.75, 14.75, 1.5, 29.5, 22, 1.5, 29.5, 29.5, 1.5, 22, 7.25, 1.5, 29.5, 29.5, 1.5, 14.75, 29.5, 1.5, 7.25, 0, 1.5, 29.5, 14.75, 1.5, 29.5, 29.5, 1.5, 22, 29.5, 1.5, 14.75, 7.25, 1.5, 29.5, 0, 1.5, -29.5, -7.5, 1.5, -29.5, -29.5, 1.5, -7.5, -29.5, 1.5, 0, 29.5, 1.5, 0, 0, 1.5, -29.5, -29.5, 1.5, 0, -7.5, 1.5, 29.5, 0, 1.5, 29.5, 29.5, 1.5, 7.25, -29.5, 1.5, 14.75, -14.75, 1.5, 29.5, -7.5, 1.5, 29.5, -29.5, 1.5, 7.25, 29.5, 1.5, -7.5, 29.5, 1.5, -14.75, 14.75, 1.5, -29.5, 7.25, 1.5, -29.5, -7.5, 1.5, -29.5, -14.75, 1.5, -29.5, -29.5, 1.5, -14.75, -29.5, 1.5, -7.5, -29.5, 1.5, 0, -29.5, 1.5, 7.25, -7.5, 1.5, 29.5, 29.5, 1.5, -7.5, 7.25, 1.5, -29.5, 0, 1.5, -29.5, 29.5, 1.5, 0)
@@ -22,6 +23,10 @@ size = Vector3(60, 2, 60)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4yuv3"]
 size = Vector3(60, 2, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bf48g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d7oon"]
 
 [node name="Debug" type="Node"]
 
@@ -40,7 +45,6 @@ offset_top = 32.0
 offset_right = 490.0
 offset_bottom = 59.0
 max_value = 20.0
-step = 1.0
 script = ExtResource("2_v0idh")
 
 [node name="GameOver" type="ColorRect" parent="."]
@@ -99,15 +103,14 @@ fov = 37.8493
 navigation_mesh = SubResource("NavigationMesh_vkg2g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-visible = false
 mesh = SubResource("BoxMesh_cjdg6")
-skeleton = NodePath("../StaticBody3D")
+skeleton = NodePath("StaticBody3D")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor/MeshInstance3D"]
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/MeshInstance3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_4yuv3")
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("5_5ius6")]
@@ -132,6 +135,18 @@ target_node = NodePath("../Player")
 [node name="CanSpawnTimer" type="Timer" parent="enemy-spawner"]
 autostart = true
 
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1588, 2.0806, 0)
+script = ExtResource("9_ichd7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+mesh = SubResource("BoxMesh_bf48g")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_d7oon")
+
 [connection signal="pressed" from="GameOver/Button" to="GameOver" method="_on_button_pressed"]
 [connection signal="state_changed" from="Player" to="DebugMenu" method="_on_player_state_changed"]
 [connection signal="timeout" from="enemy-spawner/CanSpawnTimer" to="enemy-spawner" method="_on_can_spawn_timer_timeout"]
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]

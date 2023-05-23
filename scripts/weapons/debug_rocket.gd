@@ -17,11 +17,14 @@ func _process(delta):
 		rocket_mesh.rotation.x = rocket_mesh.rotation.x + (1 * delta)
 	
 		look_at(target_node.global_position)
-	
 	move_and_slide()
 
+func _physics_process(delta):
+	if get_last_slide_collision() != null:
+		var collider = get_last_slide_collision().get_collider()
+		explode(collider)
 
-func _on_area_3d_body_entered(body):
-	if body.has_method("take_damage"):
-		body.take_damage(damage)
-
+func explode(collider):
+	if collider.has_method("take_damage"):
+		collider.take_damage(damage)
+		queue_free()
