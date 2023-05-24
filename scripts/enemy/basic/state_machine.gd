@@ -7,6 +7,7 @@ var current_state = null
 
 @export var max_health:= 40
 @export var target_node: Node3D
+@export var repair_pack_scene: PackedScene
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var health = max_health
@@ -63,4 +64,9 @@ func take_damage(damage_value):
 
 func check_death():
 	if health <= 0:
+		var repair_pack = repair_pack_scene.instantiate()  # Create an instance of the projectile scene
+		get_parent().add_child(repair_pack)  # Add the projectile to the parent node
+		
+		repair_pack.transform = self.transform  # Set the starting position of the projectile
+		
 		queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b2jykexgxnvcd"]
+[gd_scene load_steps=17 format=3 uid="uid://b2jykexgxnvcd"]
 
 [ext_resource type="Script" path="res://scripts/ui/health_bar.gd" id="2_v0idh"]
 [ext_resource type="PackedScene" uid="uid://dqn38xb82d6ls" path="res://prefabs/debug/debug.tscn" id="3_7a4yb"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://uclavqvecf70" path="res://models/characters/enemy-spawner.glb" id="7_gk8rr"]
 [ext_resource type="Script" path="res://scripts/enemy/spawner/enemy_spawner.gd" id="8_24b0f"]
 [ext_resource type="Script" path="res://scripts/obstacles/area3d_damage.gd" id="9_ichd7"]
+[ext_resource type="PackedScene" uid="uid://vji111mkun1f" path="res://prefabs/collectables/repair_pack.tscn" id="10_beomf"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_vkg2g"]
 vertices = PackedVector3Array(-22.25, 1.5, -29.5, -29.5, 1.5, -29.5, -29.5, 1.5, -22.25, -29.5, 1.5, 22, -29.5, 1.5, 29.5, -22.25, 1.5, 29.5, 29.5, 1.5, -22.25, 29.5, 1.5, -29.5, 22, 1.5, -29.5, 22, 1.5, 29.5, 29.5, 1.5, 29.5, 29.5, 1.5, 22, -29.5, 1.5, 14.75, -29.5, 1.5, 22, -22.25, 1.5, 29.5, -14.75, 1.5, 29.5, 29.5, 1.5, -22.25, 22, 1.5, -29.5, 14.75, 1.5, -29.5, 29.5, 1.5, -14.75, -14.75, 1.5, -29.5, -22.25, 1.5, -29.5, -29.5, 1.5, -22.25, -29.5, 1.5, -14.75, 14.75, 1.5, 29.5, 22, 1.5, 29.5, 29.5, 1.5, 22, 7.25, 1.5, 29.5, 29.5, 1.5, 14.75, 29.5, 1.5, 7.25, 0, 1.5, 29.5, 14.75, 1.5, 29.5, 29.5, 1.5, 22, 29.5, 1.5, 14.75, 7.25, 1.5, 29.5, 0, 1.5, -29.5, -7.5, 1.5, -29.5, -29.5, 1.5, -7.5, -29.5, 1.5, 0, 29.5, 1.5, 0, 0, 1.5, -29.5, -29.5, 1.5, 0, -7.5, 1.5, 29.5, 0, 1.5, 29.5, 29.5, 1.5, 7.25, -29.5, 1.5, 14.75, -14.75, 1.5, 29.5, -7.5, 1.5, 29.5, -29.5, 1.5, 7.25, 29.5, 1.5, -7.5, 29.5, 1.5, -14.75, 14.75, 1.5, -29.5, 7.25, 1.5, -29.5, -7.5, 1.5, -29.5, -14.75, 1.5, -29.5, -29.5, 1.5, -14.75, -29.5, 1.5, -7.5, -29.5, 1.5, 0, -29.5, 1.5, 7.25, -7.5, 1.5, 29.5, 29.5, 1.5, -7.5, 7.25, 1.5, -29.5, 0, 1.5, -29.5, 29.5, 1.5, 0)
@@ -127,7 +128,6 @@ target_node = NodePath("../Player")
 
 [node name="enemy-spawner" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("7_gk8rr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5233, 1, 20.2692)
-visible = false
 script = ExtResource("8_24b0f")
 enemy_scene = ExtResource("5_5ius6")
 target_node = NodePath("../Player")
@@ -145,6 +145,9 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_d7oon")
+
+[node name="RepairPack" parent="." instance=ExtResource("10_beomf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.378, 2, 0)
 
 [connection signal="pressed" from="GameOver/Button" to="GameOver" method="_on_button_pressed"]
 [connection signal="state_changed" from="Player" to="DebugMenu" method="_on_player_state_changed"]
