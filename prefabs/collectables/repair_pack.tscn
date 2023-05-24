@@ -2,17 +2,18 @@
 
 [ext_resource type="Script" path="res://scripts/collectables/repair_pack.gd" id="1_3cytu"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_5d7i8"]
+[sub_resource type="SphereMesh" id="SphereMesh_vcs52"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vjdtw"]
 
 [node name="RepairPack" type="Area3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 collision_layer = 32
 collision_mask = 2
 script = ExtResource("1_3cytu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_5d7i8")
+mesh = SubResource("SphereMesh_vcs52")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_vjdtw")

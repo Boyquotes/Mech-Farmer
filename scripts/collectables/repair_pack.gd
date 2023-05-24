@@ -14,3 +14,4 @@ func _process(delta):
 func _on_body_entered(body:Node3D):	
 	if body.has_method("take_heal"):
 		body.take_heal(5)
+		queue_free()

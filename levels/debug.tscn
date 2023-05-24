@@ -131,7 +131,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5233, 1, 20.2692)
 script = ExtResource("8_24b0f")
 enemy_scene = ExtResource("5_5ius6")
 target_node = NodePath("../Player")
-repair_pack_scene = ExtResource("10_beomf")
 
 [node name="CanSpawnTimer" type="Timer" parent="enemy-spawner"]
 autostart = true
