@@ -65,7 +65,7 @@ func take_damage(damage_value):
 func check_death():
 	if health <= 0:
 		var repair_pack = repair_pack_scene.instantiate()  # Create an instance of the projectile scene
-		owner.add_child(repair_pack)  # Add the projectile to the parent node
+		get_parent().add_child(repair_pack)  # Add the projectile to the parent node
 		
 		repair_pack.transform = self.transform  # Set the starting position of the projectile
 		
