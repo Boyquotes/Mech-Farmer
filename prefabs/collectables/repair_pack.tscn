@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://vji111mkun1f"]
+
+[ext_resource type="Script" path="res://scripts/collectables/repair_pack.gd" id="1_3cytu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5d7i8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vjdtw"]
+
+[node name="RepairPack" type="Area3D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_3cytu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_5d7i8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_vjdtw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

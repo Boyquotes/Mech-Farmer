@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://e5ph860sy4bu"]
+[gd_scene load_steps=8 format=3 uid="uid://e5ph860sy4bu"]
 
 [ext_resource type="Script" path="res://scripts/enemy/basic/state_machine.gd" id="1_8lni6"]
 [ext_resource type="Script" path="res://scripts/enemy/basic/states/motion/on_ground/idle.gd" id="2_gy4hf"]
+[ext_resource type="PackedScene" uid="uid://vji111mkun1f" path="res://prefabs/collectables/repair_pack.tscn" id="2_m3u2v"]
 [ext_resource type="Script" path="res://scripts/enemy/basic/states/motion/on_ground/move.gd" id="3_0cequ"]
 [ext_resource type="Script" path="res://scripts/ui/debug/enemy_states_label.gd" id="4_tgawt"]
 
@@ -14,6 +15,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 collision_layer = 4
 collision_mask = 6
 script = ExtResource("1_8lni6")
+repair_pack_scene = ExtResource("2_m3u2v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_gkd1o")
