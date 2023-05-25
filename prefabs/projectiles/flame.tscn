@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://6kknlj8u735g"]
+
+[ext_resource type="Script" path="res://scripts/projectiles/debug_flame.gd" id="1_uf3fq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kwc7a"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_t8a45"]
+
+[node name="DebugFlame" type="Area3D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_uf3fq")
+damage = 0.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_kwc7a")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_t8a45")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

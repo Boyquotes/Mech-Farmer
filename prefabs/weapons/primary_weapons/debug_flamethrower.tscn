@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccs0m0ecnco21"]
+
+[ext_resource type="Script" path="res://scripts/weapons/primary_weapons/debug_flamethrower.gd" id="1_jdlos"]
+[ext_resource type="PackedScene" uid="uid://6kknlj8u735g" path="res://prefabs/projectiles/flame.tscn" id="2_egm7r"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gtv21"]
+size = Vector3(0.25, 0.25, 1.593)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3yv3"]
+transparency = 1
+blend_mode = 1
+depth_draw_mode = 1
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_7ixtd"]
+material = SubResource("StandardMaterial3D_x3yv3")
+radius = 0.1
+section_length = 10.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kvv7x"]
+
+[node name="DebugFlamethrower" type="MeshInstance3D"]
+transform = Transform3D(1, 1.80762e-11, 0, 1.45519e-11, 1, 0, 5.82077e-11, -1.16415e-10, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_gtv21")
+skeleton = NodePath("../../../..")
+script = ExtResource("1_jdlos")
+projectile_scene = ExtResource("2_egm7r")
+
+[node name="FlameSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 1.83036e-11, 0, 1.44382e-11, 1, -1.16415e-10, 1.16415e-10, 1.16415e-10, 1, -0.000822842, 0.000952959, -0.857732)
+
+[node name="FireRateTimer" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 1.80762e-11, 1.80762e-11, 1.80762e-11, -4.37114e-08, -1, -1.80762e-11, 1, -4.37114e-08, 0, 0, -25.7074)
+mesh = SubResource("TubeTrailMesh_7ixtd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 1.01023e-12, 3.15215e-12, 1.01023e-12, 0.244113, -0.174381, -3.15215e-12, 0.174381, 0.244113, -6.78291e-12, 0.37524, 0.634645)
+mesh = SubResource("CapsuleMesh_kvv7x")
+
+[connection signal="timeout" from="FireRateTimer" to="." method="_on_fire_rate_timer_timeout"]
