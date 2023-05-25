@@ -13,6 +13,5 @@ func _on_can_spawn_timer_timeout():
 	get_parent().add_child(enemy)  # Add the projectile to the parent node
 	
 	enemy.transform = self.transform  # Set the starting position of the projectile
-	
-	# print(get_parent())
+
 	can_spawn_timer.start()

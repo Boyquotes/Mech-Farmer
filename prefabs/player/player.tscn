@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/player/state_machine.gd" id="1_asilg"]
 [ext_resource type="Script" path="res://scripts/player/states/motion/on_ground/idle.gd" id="2_7yaib"]
-[ext_resource type="PackedScene" uid="uid://cxqlokkkhycb7" path="res://prefabs/weapons/primary_weapons/debug_cannon.tscn" id="2_rrsmg"]
+[ext_resource type="PackedScene" uid="uid://ccs0m0ecnco21" path="res://prefabs/weapons/primary_weapons/debug_flamethrower.tscn" id="2_ufug7"]
 [ext_resource type="PackedScene" uid="uid://di0h4jvrj2l1y" path="res://prefabs/weapons/secondary_weapons/debug_launcher.tscn" id="3_hxjqm"]
 [ext_resource type="Script" path="res://scripts/player/states/motion/on_ground/move.gd" id="3_oi43o"]
 
@@ -30,14 +30,12 @@ transform = Transform3D(1, 1.79625e-11, 0, 1.43245e-11, 1, 0, 1.16415e-10, -2.32
 [node name="PrimarySlot1" type="Node3D" parent="Torso/Guns"]
 transform = Transform3D(1, 1.79625e-11, 0, 1.40972e-11, 1, -2.32831e-10, 4.65661e-10, -2.32831e-10, 1, 0.556247, 0.163041, -0.30528)
 
-[node name="PrimaryGun" parent="Torso/Guns/PrimarySlot1" instance=ExtResource("2_rrsmg")]
-transform = Transform3D(1, 1.83036e-11, 0, 1.43245e-11, 1, 0, 0, 0, 1, -5.96046e-08, 0, 2.98023e-08)
+[node name="PrimaryGun" parent="Torso/Guns/PrimarySlot1" instance=ExtResource("2_ufug7")]
 
 [node name="PrimarySlot2" type="Node3D" parent="Torso/Guns"]
 transform = Transform3D(1, 1.76215e-11, 0, 1.42109e-11, 1, -1.16415e-10, 2.91038e-10, -5.82077e-10, 1, -0.594656, 0.161992, -0.304177)
 
-[node name="PrimaryGun" parent="Torso/Guns/PrimarySlot2" instance=ExtResource("2_rrsmg")]
-transform = Transform3D(1, -4.00178e-11, 0, 7.25322e-11, 1, 0, 0, 1.16415e-10, 1, 5.96046e-08, 0, 2.98023e-08)
+[node name="PrimaryGun" parent="Torso/Guns/PrimarySlot2" instance=ExtResource("2_ufug7")]
 
 [node name="SecondarySlot1" type="Node3D" parent="Torso/Guns"]
 transform = Transform3D(1, 0.00128581, 0.000310462, -0.000374036, 0.5, -0.866026, -0.00126877, 0.866025, 0.500001, 0.644041, 0.664011, 0.495822)

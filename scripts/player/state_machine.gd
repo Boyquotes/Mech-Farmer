@@ -82,7 +82,6 @@ func take_heal(heal_value):
 	else:
 		health += heal_value
 		health_adjust.emit(health)
-	print(health)
 	
 func check_death():
 	if health <= 0:
