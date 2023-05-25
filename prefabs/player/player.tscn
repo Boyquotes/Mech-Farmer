@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/player/state_machine.gd" id="1_asilg"]
 [ext_resource type="Script" path="res://scripts/player/states/motion/on_ground/idle.gd" id="2_7yaib"]
-[ext_resource type="PackedScene" uid="uid://cxqlokkkhycb7" path="res://prefabs/characters/primary_weapons/debug_cannon.tscn" id="2_rrsmg"]
-[ext_resource type="PackedScene" uid="uid://di0h4jvrj2l1y" path="res://prefabs/characters/secondary_weapons/debug_launcher.tscn" id="3_hxjqm"]
+[ext_resource type="PackedScene" uid="uid://cxqlokkkhycb7" path="res://prefabs/weapons/primary_weapons/debug_cannon.tscn" id="2_rrsmg"]
+[ext_resource type="PackedScene" uid="uid://di0h4jvrj2l1y" path="res://prefabs/weapons/secondary_weapons/debug_launcher.tscn" id="3_hxjqm"]
 [ext_resource type="Script" path="res://scripts/player/states/motion/on_ground/move.gd" id="3_oi43o"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uowiw"]
