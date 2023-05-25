@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://chf5iy4cu6p6o"]
 
-[ext_resource type="Script" path="res://scripts/weapons/debug_bullet.gd" id="1_nupi4"]
+[ext_resource type="Script" path="res://scripts/projectiles/debug_bullet.gd" id="1_nupi4"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_tknyc"]
 

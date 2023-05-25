@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://di0h4jvrj2l1y"]
 
-[ext_resource type="Script" path="res://scripts/weapons/debug_launcher.gd" id="1_0nqdy"]
+[ext_resource type="Script" path="res://scripts/weapons/secondary_weapons/debug_launcher.gd" id="1_0nqdy"]
 [ext_resource type="PackedScene" uid="uid://8a0a186hveyt" path="res://prefabs/projectiles/rocket.tscn" id="2_uojxg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gtv21"]
