@@ -15,10 +15,10 @@ signal game_over
 
 
 @onready var torso = get_node("Torso/Guns")
-@onready var primary_gun_1 = torso.get_node("PrimarySlot1/PrimaryGun")
-@onready var primary_gun_2 = torso.get_node("PrimarySlot2/PrimaryGun")
-@onready var secondary_gun_1 = torso.get_node("SecondarySlot1/SecondaryGun")
-@onready var secondary_gun_2 = torso.get_node("SecondarySlot2/SecondaryGun")
+@onready var primary_gun_1 = torso.get_node("PrimarySlot1").get_child(0)
+@onready var primary_gun_2 = torso.get_node("PrimarySlot2").get_child(0)
+@onready var secondary_gun_1 = torso.get_node("SecondarySlot1").get_child(0)
+@onready var secondary_gun_2 = torso.get_node("SecondarySlot2").get_child(0)
 
 @onready var raycast: RayCast3D = torso.get_node("LockOnRayCast")
 

@@ -13,11 +13,7 @@ func fire():
 		var projectile = projectile_scene.instantiate()  # Create an instance of the projectile scene
 		flame_spawn.add_child(projectile)  # Add the projectile to the parent node
 		
-		projectile.transform = flame_spawn.transform  # Set the starting position of the projectile
-		
-		var direction = -flame_spawn.global_transform.basis.z.normalized()  # Get the direction the projectile should travel
-		
-		# projectile.linear_velocity = direction * projectile_speed  # Set the velocity of the projectile
+		projectile.transform = flame_spawn.transform  # Set the starting position of the projectile				
 		projectile.top_level = true
 		
 		can_fire = false
