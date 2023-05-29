@@ -8,15 +8,19 @@ var current_state = null
 @export var max_health:= 40
 @export var target_node: Node3D
 @export var repair_pack_scene: PackedScene
+@export var attack:= 5
 
 @onready var navigation_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var health = max_health
 @onready var invincible := false
+@onready var attack_timer: Timer = $AttackTimer
 
 @onready var states_map = {
 	"idle": $States/Idle,
 	"move": $States/Move,
 }
+
+var is_attack_ready := true
 
 func _ready():
 	for state_node in $States.get_children():
@@ -27,6 +31,9 @@ func _ready():
 
 func _physics_process(delta):
 	current_state.update(delta)
+	if get_last_slide_collision() != null:
+		var collider = get_last_slide_collision().get_collider()
+		deal_damage(collider)
 
 func _change_state(state_name):
 	current_state.exit()
@@ -61,6 +68,14 @@ func take_damage(damage_value):
 	health -= damage_value
 	# health_adjust.emit(health)
 	check_death()
+	
+func deal_damage(collider):
+	if collider.is_in_group("enemy"):
+		return
+	if collider.has_method("take_damage") and is_attack_ready:
+		collider.take_damage(attack)
+		is_attack_ready = false
+		attack_timer.start()
 
 func check_death():
 	if health <= 0:
@@ -70,3 +85,6 @@ func check_death():
 		repair_pack.transform = self.transform  # Set the starting position of the projectile
 		
 		queue_free()
+
+func _on_attack_timer_timeout():
+	is_attack_ready = true
