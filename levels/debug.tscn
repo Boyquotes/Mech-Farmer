@@ -105,13 +105,13 @@ navigation_mesh = SubResource("NavigationMesh_vkg2g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("BoxMesh_cjdg6")
-skeleton = NodePath("StaticBody3D")
+skeleton = NodePath("../StaticBody3D")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor/MeshInstance3D"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
 collision_layer = 16
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/MeshInstance3D/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("BoxShape3D_4yuv3")
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("5_5ius6")]

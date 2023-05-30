@@ -27,12 +27,12 @@ func aim_mouse():
 
 	var ray_origin = camera.project_ray_origin(mouse_pos)
 	var ray_end = ray_origin + camera.project_ray_normal(mouse_pos) * 2000
-	var ray_properties = PhysicsRayQueryParameters3D.create(ray_origin, ray_end, 16)
+	var ray_properties = PhysicsRayQueryParameters3D.create(ray_origin, ray_end, 1)
 	var ray_array = space_state.intersect_ray(ray_properties)
 	
 	var hit_pos
 	if ray_array.has("position"):
-		hit_pos = ray_array["position"] + Vector3(0,1,0)
+		hit_pos = ray_array["position"]
 	else:
 		hit_pos = Vector3()
 
