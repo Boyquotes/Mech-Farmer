@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cxqlokkkhycb7"]
 
-[ext_resource type="Script" path="res://scripts/weapons/primary_weapons/debug_cannon.gd" id="1_n75tr"]
-[ext_resource type="PackedScene" uid="uid://chf5iy4cu6p6o" path="res://prefabs/projectiles/bullet.tscn" id="2_t5mog"]
+[ext_resource type="Script" path="res://scripts/weapons/primary_weapons/debug_crop_duster.gd" id="1_g4cqr"]
+[ext_resource type="PackedScene" uid="uid://chf5iy4cu6p6o" path="res://prefabs/projectiles/bullet.tscn" id="2_q5unf"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gtv21"]
 size = Vector3(0.25, 0.25, 1.593)
@@ -21,18 +21,18 @@ section_length = 10.0
 transform = Transform3D(1, 1.80762e-11, 0, 1.45519e-11, 1, 0, 5.82077e-11, -1.16415e-10, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_gtv21")
 skeleton = NodePath("../../../..")
-script = ExtResource("1_n75tr")
-projectile_scene = ExtResource("2_t5mog")
-
-[node name="BulletSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 1.83036e-11, 0, 1.44382e-11, 1, -1.16415e-10, 1.16415e-10, 1.16415e-10, 1, -0.000822842, 0.000952959, -0.857732)
-
-[node name="FireRateTimer" type="Timer" parent="."]
-wait_time = 0.3
-one_shot = true
+script = ExtResource("1_g4cqr")
+projectile_scene = ExtResource("2_q5unf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 1.80762e-11, 1.80762e-11, 1.80762e-11, -4.37114e-08, -1, -1.80762e-11, 1, -4.37114e-08, 0, 0, -25.7074)
 mesh = SubResource("TubeTrailMesh_7ixtd")
+
+[node name="BulletSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 1.83036e-11, 0, 1.44382e-11, 1, -1.16415e-10, 1.16415e-10, 1.16415e-10, 1, -0.000822842, 0.000952959, -0.397683)
+
+[node name="FireRateTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
 [connection signal="timeout" from="FireRateTimer" to="." method="_on_fire_rate_timer_timeout"]
