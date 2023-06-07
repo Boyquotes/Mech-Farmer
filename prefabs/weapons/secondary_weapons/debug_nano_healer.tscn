@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://i2ggsfxh0ykf"]
+
+[ext_resource type="Script" path="res://scripts/weapons/secondary_weapons/debug_launcher.gd" id="1_o7ncc"]
+[ext_resource type="PackedScene" uid="uid://8a0a186hveyt" path="res://prefabs/projectiles/rocket.tscn" id="2_c4730"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gtv21"]
+size = Vector3(0.25, 0.25, 1.593)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kjkxd"]
+
+[node name="SecondaryGun" type="MeshInstance3D"]
+transform = Transform3D(1, -8.73115e-11, -1.60071e-10, -1.16415e-10, 1, 2.98023e-08, -7.27596e-11, 0, 1, -5.96046e-08, 0, 0)
+mesh = SubResource("BoxMesh_gtv21")
+skeleton = NodePath("../../../..")
+script = ExtResource("1_o7ncc")
+projectile_scene = ExtResource("2_c4730")
+projectile_speed = 10
+
+[node name="RocketSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000822842, 0.000952957, -0.79532)
+
+[node name="FireRateTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.375, 0)
+mesh = SubResource("BoxMesh_kjkxd")
+
+[connection signal="timeout" from="FireRateTimer" to="." method="_on_fire_rate_timer_timeout"]

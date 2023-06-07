@@ -2,6 +2,7 @@ extends MeshInstance3D
 
 @export var projectile_scene: PackedScene
 @export var projectile_speed: int = 20
+@export var piercing: int = 2
 
 @onready var bullet_spawn = $BulletSpawn
 @onready var fire_rate_timer: Timer = $FireRateTimer
@@ -13,6 +14,7 @@ func fire():
 		var projectile = projectile_scene.instantiate()  # Create an instance of the projectile scene
 		bullet_spawn.add_child(projectile)  # Add the projectile to the parent node
 		
+		projectile.piercing = piercing
 		projectile.transform = bullet_spawn.transform  # Set the starting position of the projectile
 		
 		var direction = -bullet_spawn.global_transform.basis.z.normalized()  # Get the direction the projectile should travel

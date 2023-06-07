@@ -2,15 +2,22 @@ extends RigidBody3D
 
 @export var damage = 40
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+var piercing
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+# func _on_body_entered(body:Node):
+# 	if body.has_method("take_damage"):
+# 		body.take_damage(damage)
+# 		piercing -= 1
+# 		linear_velocity = -global_transform.basis.z.normalized() * 20
+# 	if piercing <= 0:
+# 		queue_free()
 
-func _on_body_entered(body:Node):
+
+func _on_area_3d_body_entered(body:Node3D):
 	if body.has_method("take_damage"):
 		body.take_damage(damage)
+		piercing -= 1
+		linear_velocity = -global_transform.basis.z.normalized() * 20
+	if piercing <= 0:
 		queue_free()
+

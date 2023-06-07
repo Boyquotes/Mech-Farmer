@@ -25,6 +25,8 @@ mesh = SubResource("BoxMesh_gtv21")
 skeleton = NodePath("../../../..")
 script = ExtResource("1_qe48i")
 projectile_scene = ExtResource("2_w848m")
+projectile_speed = 10
+piercing = 5
 
 [node name="BulletSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 1.83036e-11, 0, 1.44382e-11, 1, -1.16415e-10, 1.16415e-10, 1.16415e-10, 1, -0.000822842, 0.000952959, -0.397683)
