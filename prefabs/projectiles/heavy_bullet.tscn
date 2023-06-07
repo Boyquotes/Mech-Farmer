@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddrn4y7oska8l"]
+
+[ext_resource type="Script" path="res://scripts/projectiles/heavy_bullet.gd" id="1_lcy8t"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_n3ws7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kwc7a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ygw3u"]
+
+[node name="DebugHeavyBullet" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 0
+mass = 20.0
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_lcy8t")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_n3ws7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_kwc7a")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_ygw3u")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://bge3lfxfmyadh"]
+
+[ext_resource type="Script" path="res://scripts/levels/mech_shop/mech_shop.gd" id="1_4nq2q"]
+[ext_resource type="PackedScene" uid="uid://cxqlokkkhycb7" path="res://prefabs/weapons/primary_weapons/debug_cannon.tscn" id="2_lunds"]
+[ext_resource type="PackedScene" uid="uid://ccs0m0ecnco21" path="res://prefabs/weapons/primary_weapons/debug_flamethrower.tscn" id="3_gr5ar"]
+[ext_resource type="PackedScene" uid="uid://bvo4kbhe47g71" path="res://prefabs/player/customize_player.tscn" id="4_rwvvx"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_ygtif"]
+resource_name = "Potato"
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_p6e4f"]
+resource_name = "Potato"
+
+[node name="MechShop" type="Node3D"]
+script = ExtResource("1_4nq2q")
+varmint_cannon_scene = ExtResource("2_lunds")
+heavy_flamer_scene = ExtResource("3_gr5ar")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.759271, 0.244837, -0.602961, 0, 0.926529, 0.376224, 0.650774, 0.285656, -0.703487, -0.989811, 2.807, -2.945)
+
+[node name="Player" parent="." instance=ExtResource("4_rwvvx")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 402.0
+offset_bottom = 500.0
+
+[node name="VarmintCannonButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_ygtif")
+text = "Varmint Cannon"
+
+[node name="HeavyFlamerButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_p6e4f")
+text = "Heavy Flamer"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.689202, 0, -0.724569, 0, 1, 0, 0.724569, 0, -0.689202, 0, 3.04743, 0)
+
+[connection signal="pressed" from="Control/VBoxContainer/VarmintCannonButton" to="." method="_on_varmint_cannon_button_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/HeavyFlamerButton" to="." method="_on_heavy_flamer_button_pressed"]
